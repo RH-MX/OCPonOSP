@@ -1,0 +1,13 @@
+---
+- hosts:
+  - OSEv3
+  tasks:       
+  - name: Tail resolv
+    command: "tail -1 /etc/resolv.conf"
+    register: nameserver
+  
+  - name: Set node DNS
+    copy:
+        content: "search cluster.local svc paas.americamovil.com
+        {{ nameserver.stdout }}"
+        dest: /etc/origin/node/resolv.conf

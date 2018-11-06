@@ -1,0 +1,11 @@
+---
+- hosts:
+  - OSEv3
+  tasks:       
+  - name: Set NM CONTROLLED
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+      line: 'NM_CONTROLLED=yes'
+      insertafter: '^ONBOOT='
+
+

@@ -1,0 +1,8 @@
+---
+## credentials
+vault_root_ssh_key: ssh-rsa XXXX root@bastionocp
+vault_rhsub_user: user
+vault_rhsub_password: password
+vault_rhsub_pool: XXXX
+vault_rhsub_server: subscription.rhn.redhat.com
+...

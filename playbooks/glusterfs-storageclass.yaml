@@ -1,0 +1,10 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: glusterfs
+provisioner: kubernetes.io/glusterfs
+parameters:
+  resturl: "http://heketi-storage.glusterfs.svc:8080"
+  restuser: "admin"
+  secretNamespace: "glusterfs"
+  secretName: "heketi-storage-admin-secret"

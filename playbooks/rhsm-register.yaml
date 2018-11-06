@@ -1,0 +1,31 @@
+---
+- hosts:
+  - OSEv3
+  tasks:
+  - name: Allow rhsm a longer timeout to help out with subscription-manager
+    lineinfile:
+      dest: /etc/rhsm/rhsm.conf
+      line: 'server_timeout=600'
+      insertafter: '^proxy_password ='
+
+  - name: Is the host already registered?
+    command: "subscription-manager version"
+    register: subscribed
+    changed_when: no
+    ignore_errors: yes
+
+  - name: Register subscription
+    command: "subscription-manager register --force --username='{{ vault_rhsub_user }}' --password='{{ vault_rhsub_password }}'"
+    register: subscription_register
+    when: vault_rhsub_pool is defined and vault_rhsub_pool
+    changed_when: no
+    
+  - name: Auto attach subscription
+    command: "subscription-manager attach --auto"
+    register: subscription_attach
+    when: vault_rhsub_pool is defined and vault_rhsub_pool
+    changed_when: no    
+    
+  - name: Enable repos
+    command: "subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-extras-rpms --enable=rhel-7-server-ose-3.11-rpms --enable=rhel-7-server-ansible-2.6-rpms --enable=rh-gluster-3-client-for-rhel-7-server-rpms"
+    register: subscription_repos

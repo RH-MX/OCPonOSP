@@ -1,0 +1,15 @@
+---
+- hosts:
+  - OSEv3
+  tasks:       
+  - name: Set upstream DNS
+    copy:
+        content: |
+                 server=/svc/172.30.0.1
+                 server=192.168.8.53
+                 server=8.8.8.8
+        dest: /etc/dnsmasq.d/origin-upstream-dns.conf
+
+  - name: dnsmasq restart
+    command: "service dnsmasq restart"
+    register: dnsmasq_restart

@@ -1,0 +1,4 @@
+docker run -t -u `id -u` -v /root/.ssh/id_rsa:/opt/app-root/src/.ssh/id_rsa:Z -v /etc/ansible/hosts:/tmp/inventory:Z -e INVENTORY_FILE=/tmp/inventory -e PLAYBOOK_FILE=playbooks/prerequisites.yml -e OPTS="-v" registry.access.redhat.com/openshift3/ose-ansible:v3.11.16
+
+
+docker run -t -u `id -u` -v /root/.ssh/id_rsa:/opt/app-root/src/.ssh/id_rsa:Z -v /etc/ansible/hosts:/tmp/inventory:Z -e INVENTORY_FILE=/tmp/inventory -e PLAYBOOK_FILE=playbooks/deploy_cluster.yml -e OPTS="-v" registry.access.redhat.com/openshift3/ose-ansible:v3.11.16

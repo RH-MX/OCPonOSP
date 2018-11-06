@@ -1,0 +1,13 @@
+---
+- hosts:
+  - OSEv3
+  tasks:       
+  - name: Set upstream DNS
+    copy:
+        content: |
+                 server=8.8.8.8
+        dest: /etc/dnsmasq.d/origin-upstream-dns.conf
+
+  - name: dnsmasq restart
+    command: "service dnsmasq restart"
+    register: dnsmasq_restart
