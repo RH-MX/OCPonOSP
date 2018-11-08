@@ -1,0 +1,4 @@
+---
+- import_playbook: https://github.com/openshift/openshift-ansible/blob/master/playbooks/adhoc/uninstall_openshift.yml
+- import_playbook: https://github.com/openshift/openshift-ansible/blob/master/playbooks/adhoc/uninstall_docker.yml
+  when: openshift_uninstall_docker | default(False) | bool
